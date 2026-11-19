@@ -1,0 +1,22 @@
+TITLE: Contact Dermatitis, Irritation and Allergy Safety
+DOCUMENT STATUS: DRAFT FOR CLINICAL REVIEW — NOT APPROVED FOR PATIENT-SPECIFIC RECOMMENDATIONS
+Prepared: 2026-11-12
+Reviewer: NOT YET ASSIGNED
+Use: Source-grounded medicine information retrieval only. These notes do not establish a diagnosis or authorize a prescription. Local rules on medicine availability differ. Review against current official prescribing information before clinical deployment.
+
+Contact dermatitis is a skin reaction after exposure to an irritant or allergen. It may cause dryness, itching, cracking, rash and changes in skin color. Different conditions can look alike: a camera image cannot determine whether a rash represents allergy, irritation, infection, acne or another condition.
+
+GENERAL CARE INFORMATION: Identification and avoidance of the trigger is central when contact dermatitis is established. Fragrance or skincare products can be triggers. Emollients (moisturizers) may support the skin barrier, although even an emollient can cause irritation in some people.
+
+TOPICAL CORTICOSTEROIDS: Sometimes prescribed for contact dermatitis, but use on the face requires particular caution because skin is thinner and potential adverse effects include skin thinning, pigment changes and acne-like lesions. No steroid selection, strength or application schedule should be offered based on a photograph alone.
+
+CLINICIAN REVIEW: Seek assessment for severe, painful, spreading, recurring or persistent symptoms or suspected infection.
+
+EMERGENCY RED FLAGS: Sudden swelling of lips, mouth, tongue or throat, difficulty breathing or swallowing, fainting or severe confusion can signal a serious allergic reaction. Seek emergency medical help immediately. The RAG system should not offer a topical medicine instead of urgent escalation.
+
+RAG POLICY: These passages support educational explanations and referral warnings, not diagnosis or automatic treatment selection.
+
+SOURCES:
+NHS, Contact dermatitis: https://www.nhs.uk/conditions/contact-dermatitis/
+NHS, Contact dermatitis treatment: https://www.nhs.uk/conditions/contact-dermatitis/treatment/
+NHS, Anaphylaxis: https://www.nhs.uk/conditions/anaphylaxis/

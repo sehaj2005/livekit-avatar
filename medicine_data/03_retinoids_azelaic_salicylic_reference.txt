@@ -1,0 +1,22 @@
+TITLE: Topical Retinoids, Azelaic Acid and Salicylic Acid
+DOCUMENT STATUS: DRAFT FOR CLINICAL REVIEW — NOT APPROVED FOR PATIENT-SPECIFIC RECOMMENDATIONS
+Prepared: 2026-11-12
+Reviewer: NOT YET ASSIGNED
+Use: Source-grounded medicine information retrieval only. These notes do not establish a diagnosis or authorize a prescription. Local rules on medicine availability differ. Review against current official prescribing information before clinical deployment.
+
+TOPICAL RETINOIDS (e.g., adapalene, tretinoin): Used in acne care, particularly where blocked pores are involved. May cause dryness, redness, peeling, and irritation. Pregnancy or planning pregnancy is an important exclusion: do not use topical retinoids in pregnancy. Prescription/access status varies by location and product. Professional assessment needed.
+
+AZELAIC ACID: A topical acne treatment that also has roles in some other dermatologist-managed skin conditions. Side effects can include temporary stinging, burning, itching, dry skin and redness. Product strengths, indications and access vary; refer to the specific product label and clinician/pharmacist.
+
+SALICYLIC ACID: An exfoliating ingredient present in certain acne products. It can help with blocked pores; overuse or layering with other actives can irritate skin. It is not a universal solution for all facial bumps or rashes.
+
+PREGNANCY AND OTHER CONTEXT: Do not automatically suggest treatment for a pregnant user, someone planning pregnancy, or a child based on face images. Medication allergies, other treatment use, severity, and current product label matter.
+
+PRESCRIBING: No concentrations, frequencies, duration, or individualized dosing instructions are supplied by this draft.
+
+RAG POLICY: Explain which agents appear in clinical references and summarize caveats. Never infer that a photographed rash is acne or choose these products for the individual.
+
+SOURCES:
+AAD, Acne diagnosis and treatment: https://www.aad.org/public/diseases/acne/derm-treat/treat/
+NHS, Acne treatment: https://www.nhs.uk/conditions/acne/treatment/
+UKTIS / Medicines in Pregnancy, Topical retinoids: https://www.medicinesinpregnancy.org/leaflets-a-z/isotretinoin-gel/

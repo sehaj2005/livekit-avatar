@@ -1,0 +1,301 @@
+.admin-content > nav.admin-header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 4px 0;
+}
+
+.admin-content > nav.admin-header-actions button {
+  min-height: 44px;
+  padding: 11px 18px;
+  border: 1px solid #344862;
+  border-radius: 10px;
+  background: #18263d;
+  color: #cbd5e1;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-content > nav.admin-header-actions button:hover {
+  background: #223755;
+  border-color: #4773ad;
+  color: #ffffff;
+}
+
+.admin-content > nav.admin-header-actions button[aria-pressed="true"] {
+  background: #2563eb;
+  border-color: #3b82f6;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.2);
+}
+
+.admin-content > nav.admin-header-actions button:focus-visible {
+  outline: 2px solid #60a5fa;
+  outline-offset: 3px;
+}
+
+
+/* Create Super Admin Invitation */
+
+.admin-user-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.admin-user-form label {
+  color: #cbd5e1;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.admin-user-form input {
+  width: 100%;
+  max-width: 480px;
+  min-height: 46px;
+  padding: 12px 14px;
+  border: 1px solid #40516a;
+  border-radius: 10px;
+  background: #0c1525;
+  color: #f8fafc;
+  font-size: 14px;
+  outline: none;
+}
+
+.admin-user-form input::placeholder {
+  color: #64748b;
+}
+
+.admin-user-form input:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.admin-user-form button {
+  min-height: 44px;
+  padding: 11px 20px;
+  border: none;
+  border-radius: 9px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.admin-user-form button:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.admin-user-form button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+/* Generated Invitation Link */
+
+.admin-invite-result {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 24px;
+  padding: 20px;
+  border: 1px solid #2d537e;
+  border-radius: 12px;
+  background: rgba(37, 99, 235, 0.08);
+}
+
+.admin-invite-result p {
+  margin: 0;
+  color: #bfdbfe;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.admin-invite-result input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #3c5676;
+  border-radius: 8px;
+  background: #0b1424;
+  color: #e2e8f0;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-invite-result button {
+  padding: 11px 16px;
+  border: 1px solid #3b82f6;
+  border-radius: 9px;
+  background: #1d4ed8;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.admin-invite-result button:hover {
+  background: #2563eb;
+}
+
+
+/* Super Admin Account Management */
+
+.admin-account-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.admin-account-actions button {
+  min-height: 34px;
+  padding: 8px 12px;
+  border: 1px solid #3b526e;
+  border-radius: 8px;
+  background: #1c304b;
+  color: #dbeafe;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.admin-account-actions button:hover:not(:disabled) {
+  background: #2b476a;
+  border-color: #6084b3;
+}
+
+.admin-account-actions button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.admin-account-actions button:first-child {
+  border-color: #825252;
+}
+
+.admin-account-actions button:first-child:hover:not(:disabled) {
+  background: #663434;
+}
+
+
+/* Administrator Table Improvements */
+
+.admin-content .admin-table td {
+  vertical-align: middle;
+}
+
+.admin-content .admin-table td:first-child {
+  font-weight: 500;
+}
+
+.admin-content .admin-table td button:focus-visible {
+  outline: 2px solid #60a5fa;
+  outline-offset: 2px;
+}
+
+.admin-content .admin-table-wrapper {
+  scrollbar-width: thin;
+  scrollbar-color: #405472 #111c2e;
+}
+
+
+/* Status Indicators */
+
+.admin-content .admin-status {
+  white-space: nowrap;
+}
+
+.admin-content .admin-status.active {
+  color: #86efac;
+}
+
+.admin-content .admin-section-header h2 {
+  line-height: 1.4;
+}
+
+
+/* Feedback and Notifications */
+
+.admin-content > .admin-muted {
+  padding: 12px 15px;
+  border: 1px solid #345579;
+  border-radius: 9px;
+  background: rgba(37, 99, 235, 0.08);
+  color: #bfdbfe;
+  line-height: 1.6;
+}
+
+.admin-content > .admin-error {
+  margin: 0;
+}
+
+
+/* Responsive Layout */
+
+@media (max-width: 900px) {
+  .admin-content > nav.admin-header-actions {
+    gap: 10px;
+  }
+
+  .admin-content > nav.admin-header-actions button {
+    flex: 1;
+  }
+
+  .admin-account-actions {
+    min-width: 210px;
+  }
+}
+
+@media (max-width: 600px) {
+  .admin-content > nav.admin-header-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-content > nav.admin-header-actions button {
+    width: 100%;
+  }
+
+  .admin-user-form {
+    align-items: stretch;
+  }
+
+  .admin-user-form input {
+    max-width: none;
+  }
+
+  .admin-user-form button {
+    width: 100%;
+  }
+
+  .admin-invite-result {
+    padding: 15px;
+  }
+
+  .admin-invite-result button {
+    width: 100%;
+  }
+
+  .admin-account-actions {
+    min-width: 180px;
+  }
+
+  .admin-account-actions button {
+    flex: 1;
+  }
+}

@@ -1,0 +1,204 @@
+WARNING:livekit.agents:dev mode is deprecated and will be removed in a future release; use `lk agent dev` instead (https://docs.livekit.io/reference/developer-tools/livekit-cli/#setup)
+WARNING:livekit.agents:in-process auto-reload has been removed from the Python CLI; use `lk agent dev` for hot-reload
+DEBUG:asyncio:Using proactor: IocpProactor
+2026-11-16 17:22:38,671 - [36mDEBUG[0m asyncio - Using proactor: IocpProactor [90m[0m
+DEBUG:livekit.agents:no system trust store found, setting SSL_CERT_FILE to the certifi bundle
+2026-11-16 17:22:38,674 - [36mDEBUG[0m livekit.agents - no system trust store found, setting SSL_CERT_FILE to the certifi bundle [90m[0m
+INFO:livekit.agents:starting worker
+2026-11-16 17:22:38,674 - [32mINFO[0m livekit.agents - starting worker [90m{"version": "1.8.10", "rtc-version": "1.1.21"}[0m
+INFO:livekit.agents:plugin registered
+2026-11-16 17:22:38,675 - [32mINFO[0m livekit.agents - plugin registered [90m{"plugin": "livekit.plugins.simli", "version": "1.8.10"}[0m
+INFO:livekit.agents:HTTP server listening on :58032
+2026-11-16 17:22:38,678 - [32mINFO[0m livekit.agents - HTTP server listening on :58032 [90m[0m
+WARNING:livekit.agents:event loop blocked for 522ms at "C:\Users\DELL\AppData\Local\Python\pythoncore-3.14-64\Lib\ssl.py", line 717, in create_default_context; synchronous work on the agent loop delays audio and turn handling, move it to a thread or an async client
+2026-11-16 17:22:39,215 - [33mWARNING[0m livekit.agents - event loop blocked for 522ms at "C:\Users\DELL\AppData\Local\Python\pythoncore-3.14-64\Lib\ssl.py", line 717, in create_default_context; synchronous work on the agent loop delays audio and turn handling, move it to a thread or an async client [90m{"duration": 0.5222, "threshold": 0.1, "gc_time": 0.0, "cpu_time": 0.5156, "task": "worker_main_task_cli", "stack": "# loop thread sampled 96ms into the stall\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\agent\\agent.py\", line 804, in <module>\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\livekit\\agents\\cli\\cli.py\", line 480, in run_app\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\livekit\\agents\\cli\\_legacy.py\", line 1994, in run_app\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\typer\\main.py\", line 1137, in __call__\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\typer\\_click\\core.py\", line 802, in __call__\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\typer\\core.py\", line 1197, in main\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\typer\\core.py\", line 187, in _main\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\typer\\core.py\", line 1119, in invoke\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\typer\\_click\\core.py\", line 741, in invoke\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\typer\\_click\\core.py\", line 483, in invoke\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\typer\\main.py\", line 1524, in wrapper\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\livekit\\agents\\cli\\_legacy.py\", line 1840, in dev\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\livekit\\agents\\cli\\cli.py\", line 415, in _run_worker\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\livekit\\agents\\cli\\cli.py\", line 395, in _worker_run\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\livekit\\agents\\worker.py\", line 821, in run\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\livekit\\agents\\utils\\http_context.py\", line 61, in _create_ssl_context\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\livekit\\agents\\utils\\http_context.py\", line 67, in _ssl_context_for\n  File \"C:\\Users\\DELL\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\ssl.py\", line 717, in create_default_context"}[0m
+INFO:livekit.agents:registered worker
+2026-11-16 17:22:39,565 - [32mINFO[0m livekit.agents - registered worker [90m{"agent_name": "avatar-agent", "deployment": "", "id": "AW_wsdXbc7DXaKH", "url": "wss://ai-realtime-avatar-ca9pdiqn.livekit.cloud", "region": "India South", "protocol": 19}[0m
+INFO:livekit.agents:received job request
+2026-11-16 17:23:09,558 - [32mINFO[0m livekit.agents - received job request [90m{"job_id": "AJ_ivkLZeYiFsVv", "dispatch_id": "AD_7nMJjD9eayTh", "room": "room_44f181a59f384ef6", "room_id": "RM_KbibyyHxPhBA", "agent_name": "avatar-agent", "resuming": false, "enable_recording": true}[0m
+DEBUG:livekit.agents:received assignment
+2026-11-16 17:23:09,628 - [36mDEBUG[0m livekit.agents - received assignment [90m{"agent_name": "avatar-agent", "room_id": "RM_KbibyyHxPhBA", "room": "room_44f181a59f384ef6", "job_id": "AJ_ivkLZeYiFsVv", "dispatch_id": "AD_7nMJjD9eayTh", "enable_recording": true}[0m
+WARNING:livekit.agents:no warmed process available for job, waiting for one to be created
+2026-11-16 17:23:09,629 - [33mWARNING[0m livekit.agents - no warmed process available for job, waiting for one to be created [90m{"job_id": "AJ_ivkLZeYiFsVv"}[0m
+INFO:livekit.agents:initializing job runner
+2026-11-16 17:23:09,644 - [32mINFO[0m livekit.agents - initializing job runner [90m{"tid": 28020}[0m
+DEBUG:livekit.agents:preloaded av
+2026-11-16 17:23:09,648 - [36mDEBUG[0m livekit.agents - preloaded av [90m{"elapsed": 0.0}[0m
+DEBUG:livekit.agents:preloaded the local inference models
+2026-11-16 17:23:10,361 - [36mDEBUG[0m livekit.agents - preloaded the local inference models [90m{"elapsed": 0.712}[0m
+DEBUG:livekit.agents:preloaded the livekit-rtc native library
+2026-11-16 17:23:10,409 - [36mDEBUG[0m livekit.agents - preloaded the livekit-rtc native library [90m{"elapsed": 0.044}[0m
+DEBUG:livekit.agents:preloaded the openai SDK resources
+2026-11-16 17:23:10,424 - [36mDEBUG[0m livekit.agents - preloaded the openai SDK resources [90m{"elapsed": 0.015}[0m
+DEBUG:livekit.agents:preloaded the httpx client
+2026-11-16 17:23:11,944 - [36mDEBUG[0m livekit.agents - preloaded the httpx client [90m{"elapsed": 1.519}[0m
+DEBUG:asyncio:Using proactor: IocpProactor
+2026-11-16 17:23:11,954 - [36mDEBUG[0m asyncio - Using proactor: IocpProactor [90m[0m
+INFO:livekit.agents:job runner initialized
+2026-11-16 17:23:11,955 - [32mINFO[0m livekit.agents - job runner initialized [90m{"tid": 28020, "elapsed_time": 2.31}[0m
+INFO:mateo-agent:Starting Mateo for room: room_44f181a59f384ef6
+2026-11-16 17:23:12,005 - [32mINFO[0m mateo-agent - Starting Mateo for room: room_44f181a59f384ef6 [90m[0m
+ERROR:livekit.agents:unhandled exception while running the job task
+Traceback (most recent call last):
+  File "C:\Users\DELL\OneDrive\Documents\livekit-avatar-starter\.venv\Lib\site-packages\livekit\agents\ipc\job_proc_lazy_main.py", line 353, in _traceable_entrypoint
+    await self._job_entrypoint_fnc(job_ctx)
+  File "C:\Users\DELL\OneDrive\Documents\livekit-avatar-starter\agent\agent.py", line 596, in avatar_agent
+    register_skin_voice_bridge(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        room=ctx.room,
+        ^^^^^^^^^^^^^^
+        session=session,
+        ^^^^^^^^^^^^^^^^
+        session_is_ready=lambda: session_ready,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+TypeError: register_skin_voice_bridge() missing 1 required positional argument: 'restore_listening'
+2026-11-16 17:23:13,377 - [31mERROR[0m livekit.agents - unhandled exception while running the job task [90m[0m
+Traceback (most recent call last):
+  File "C:\Users\DELL\OneDrive\Documents\livekit-avatar-starter\.venv\Lib\site-packages\livekit\agents\ipc\job_proc_lazy_main.py", line 353, in _traceable_entrypoint
+    await self._job_entrypoint_fnc(job_ctx)
+  File "C:\Users\DELL\OneDrive\Documents\livekit-avatar-starter\agent\agent.py", line 596, in avatar_agent
+    register_skin_voice_bridge(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        room=ctx.room,
+        ^^^^^^^^^^^^^^
+        session=session,
+        ^^^^^^^^^^^^^^^^
+        session_is_ready=lambda: session_ready,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+TypeError: register_skin_voice_bridge() missing 1 required positional argument: 'restore_listening'
+WARNING:livekit.agents:event loop blocked for 1355ms at "C:\Users\DELL\AppData\Local\Python\pythoncore-3.14-64\Lib\ssl.py", line 717, in create_default_context; synchronous work on the agent loop delays audio and turn handling, move it to a thread or an async client
+2026-11-16 17:23:13,381 - [33mWARNING[0m livekit.agents - event loop blocked for 1355ms at "C:\Users\DELL\AppData\Local\Python\pythoncore-3.14-64\Lib\ssl.py", line 717, in create_default_context; synchronous work on the agent loop delays audio and turn handling, move it to a thread or an async client [90m{"duration": 1.3554, "threshold": 0.1, "gc_time": 0.0, "cpu_time": 0.9062, "task": "job_user_entrypoint", "stack": "# loop thread sampled 1003ms into the stall\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\agent\\agent.py\", line 214, in avatar_agent\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\livekit\\agents\\inference\\llm.py\", line 367, in __init__\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\httpx2\\_client.py\", line 1498, in __init__\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\httpx2\\_client.py\", line 1539, in _init_transport\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\httpx2\\_transports\\default.py\", line 292, in __init__\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\httpx2\\_config.py\", line 35, in create_ssl_context\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\httpcore2\\_ssl.py\", line 22, in default_ssl_context\n  File \"C:\\Users\\DELL\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\ssl.py\", line 717, in create_default_context"}[0m
+DEBUG:livekit.agents:shutting down job task
+2026-11-16 17:23:13,384 - [36mDEBUG[0m livekit.agents - shutting down job task [90m{"reason": "job crashed", "user_initiated": false}[0m
+DEBUG:livekit.agents:configuring session recording
+2026-11-16 17:23:13,387 - [36mDEBUG[0m livekit.agents - configuring session recording [90m[0m
+DEBUG:livekit.agents:job exiting
+2026-11-16 17:23:13,400 - [36mDEBUG[0m livekit.agents - job exiting [90m{"reason": "job crashed", "tid": 28020, "job_id": "AJ_ivkLZeYiFsVv", "room": "room_44f181a59f384ef6", "room_id": "RM_KbibyyHxPhBA", "agent_name": "avatar-agent"}[0m
+WARNING:livekit.agents:event loop blocked for 256ms importing anyio.abc._sockets at "C:\Users\DELL\AppData\Local\Python\pythoncore-3.14-64\Lib\importlib\__init__.py", line 88, in import_module; import it at process warm-up (prewarm) instead of on first use
+2026-11-16 17:23:13,827 - [33mWARNING[0m livekit.agents - event loop blocked for 256ms importing anyio.abc._sockets at "C:\Users\DELL\AppData\Local\Python\pythoncore-3.14-64\Lib\importlib\__init__.py", line 88, in import_module; import it at process warm-up (prewarm) instead of on first use [90m{"duration": 0.256, "threshold": 0.1, "gc_time": 0.0, "cpu_time": 0.0469, "task": "Task-22", "stack": "# loop thread sampled 110ms into the stall\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\httpx2\\_client.py\", line 1880, in _send_handling_redirects\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\httpx2\\_client.py\", line 1914, in _send_single_request\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\httpx2\\_transports\\default.py\", line 388, in handle_async_request\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\httpcore2\\_async\\connection_pool.py\", line 216, in handle_async_request\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\httpcore2\\_async\\connection_pool.py\", line 355, in _assign_requests_to_connections\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\httpcore2\\_async\\connection_pool.py\", line 27, in assign_to_connection\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\httpcore2\\_synchronization.py\", line 129, in set\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\httpcore2\\_synchronization.py\", line 125, in setup\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\anyio\\_core\\_synchronization.py\", line 93, in __new__\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\anyio\\_core\\_eventloop.py\", line 206, in get_async_backend\n  File \"C:\\Users\\DELL\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\importlib\\__init__.py\", line 88, in import_module\n  [import system: 6 frames, importing anyio.abc._sockets]\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\anyio\\_backends\\_asyncio.py\", line 81, in <module>\n  [import system: 5 frames, importing anyio.abc._sockets]\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\anyio\\_core\\_sockets.py\", line 17, in <module>\n  [import system: 1 frames, importing anyio.abc._sockets]\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\anyio\\_lazyimport.py\", line 47, in __getattr__\n  File \"C:\\Users\\DELL\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\importlib\\__init__.py\", line 88, in import_module\n  [import system: 6 frames, importing anyio.abc._sockets]\n  File \"<frozen importlib._bootstrap_external>\", line 951, in get_data", "import": "anyio.abc._sockets"}[0m
+DEBUG:livekit.agents:http_session(): closing the httpclient ctx
+2026-11-16 17:23:15,481 - [36mDEBUG[0m livekit.agents - http_session(): closing the httpclient ctx [90m[0m
+DEBUG:livekit.agents:http_session(): creating a new httpclient ctx
+2026-11-16 17:23:15,482 - [36mDEBUG[0m livekit.agents - http_session(): creating a new httpclient ctx [90m[0m
+INFO:livekit.agents:received job request
+2026-11-16 17:23:16,552 - [32mINFO[0m livekit.agents - received job request [90m{"job_id": "AJ_ivkLZeYiFsVv", "dispatch_id": "AD_7nMJjD9eayTh", "room": "room_44f181a59f384ef6", "room_id": "RM_KbibyyHxPhBA", "agent_name": "avatar-agent", "resuming": false, "enable_recording": true}[0m
+DEBUG:livekit.agents:received assignment
+2026-11-16 17:23:16,610 - [36mDEBUG[0m livekit.agents - received assignment [90m{"agent_name": "avatar-agent", "room_id": "RM_KbibyyHxPhBA", "room": "room_44f181a59f384ef6", "job_id": "AJ_ivkLZeYiFsVv", "dispatch_id": "AD_7nMJjD9eayTh", "enable_recording": true}[0m
+WARNING:livekit.agents:no warmed process available for job, waiting for one to be created
+2026-11-16 17:23:16,610 - [33mWARNING[0m livekit.agents - no warmed process available for job, waiting for one to be created [90m{"job_id": "AJ_ivkLZeYiFsVv"}[0m
+INFO:livekit.agents:initializing job runner
+2026-11-16 17:23:16,615 - [32mINFO[0m livekit.agents - initializing job runner [90m{"tid": 9992}[0m
+INFO:livekit.agents:job runner initialized
+2026-11-16 17:23:16,616 - [32mINFO[0m livekit.agents - job runner initialized [90m{"tid": 9992, "elapsed_time": 0.0}[0m
+DEBUG:asyncio:Using proactor: IocpProactor
+2026-11-16 17:23:16,617 - [36mDEBUG[0m asyncio - Using proactor: IocpProactor [90m[0m
+INFO:mateo-agent:Starting Mateo for room: room_44f181a59f384ef6
+2026-11-16 17:23:16,641 - [32mINFO[0m mateo-agent - Starting Mateo for room: room_44f181a59f384ef6 [90m[0m
+ERROR:livekit.agents:unhandled exception while running the job task
+Traceback (most recent call last):
+  File "C:\Users\DELL\OneDrive\Documents\livekit-avatar-starter\.venv\Lib\site-packages\livekit\agents\ipc\job_proc_lazy_main.py", line 353, in _traceable_entrypoint
+    await self._job_entrypoint_fnc(job_ctx)
+  File "C:\Users\DELL\OneDrive\Documents\livekit-avatar-starter\agent\agent.py", line 596, in avatar_agent
+    register_skin_voice_bridge(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        room=ctx.room,
+        ^^^^^^^^^^^^^^
+        session=session,
+        ^^^^^^^^^^^^^^^^
+        session_is_ready=lambda: session_ready,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+TypeError: register_skin_voice_bridge() missing 1 required positional argument: 'restore_listening'
+2026-11-16 17:23:17,689 - [31mERROR[0m livekit.agents - unhandled exception while running the job task [90m[0m
+Traceback (most recent call last):
+  File "C:\Users\DELL\OneDrive\Documents\livekit-avatar-starter\.venv\Lib\site-packages\livekit\agents\ipc\job_proc_lazy_main.py", line 353, in _traceable_entrypoint
+    await self._job_entrypoint_fnc(job_ctx)
+  File "C:\Users\DELL\OneDrive\Documents\livekit-avatar-starter\agent\agent.py", line 596, in avatar_agent
+    register_skin_voice_bridge(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        room=ctx.room,
+        ^^^^^^^^^^^^^^
+        session=session,
+        ^^^^^^^^^^^^^^^^
+        session_is_ready=lambda: session_ready,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+TypeError: register_skin_voice_bridge() missing 1 required positional argument: 'restore_listening'
+WARNING:livekit.agents:event loop blocked for 1051ms at "C:\Users\DELL\AppData\Local\Python\pythoncore-3.14-64\Lib\ssl.py", line 717, in create_default_context; synchronous work on the agent loop delays audio and turn handling, move it to a thread or an async client
+2026-11-16 17:23:17,693 - [33mWARNING[0m livekit.agents - event loop blocked for 1051ms at "C:\Users\DELL\AppData\Local\Python\pythoncore-3.14-64\Lib\ssl.py", line 717, in create_default_context; synchronous work on the agent loop delays audio and turn handling, move it to a thread or an async client [90m{"duration": 1.0511, "threshold": 0.1, "gc_time": 0.0, "cpu_time": 0.8125, "task": "job_user_entrypoint", "stack": "# loop thread sampled 1009ms into the stall\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\agent\\agent.py\", line 214, in avatar_agent\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\livekit\\agents\\inference\\llm.py\", line 367, in __init__\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\httpx2\\_client.py\", line 1498, in __init__\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\httpx2\\_client.py\", line 1539, in _init_transport\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\httpx2\\_transports\\default.py\", line 292, in __init__\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\httpx2\\_config.py\", line 35, in create_ssl_context\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\httpcore2\\_ssl.py\", line 22, in default_ssl_context\n  File \"C:\\Users\\DELL\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\ssl.py\", line 717, in create_default_context"}[0m
+DEBUG:livekit.agents:shutting down job task
+2026-11-16 17:23:17,696 - [36mDEBUG[0m livekit.agents - shutting down job task [90m{"reason": "job crashed", "user_initiated": false}[0m
+DEBUG:livekit.agents:configuring session recording
+2026-11-16 17:23:17,698 - [36mDEBUG[0m livekit.agents - configuring session recording [90m[0m
+DEBUG:livekit.agents:job exiting
+2026-11-16 17:23:17,718 - [36mDEBUG[0m livekit.agents - job exiting [90m{"reason": "job crashed", "tid": 9992, "job_id": "AJ_ivkLZeYiFsVv", "room": "room_44f181a59f384ef6", "room_id": "RM_KbibyyHxPhBA", "agent_name": "avatar-agent"}[0m
+DEBUG:livekit.agents:http_session(): closing the httpclient ctx
+2026-11-16 17:23:18,796 - [36mDEBUG[0m livekit.agents - http_session(): closing the httpclient ctx [90m[0m
+DEBUG:livekit.agents:http_session(): creating a new httpclient ctx
+2026-11-16 17:23:18,797 - [36mDEBUG[0m livekit.agents - http_session(): creating a new httpclient ctx [90m[0m
+INFO:livekit.agents:received job request
+2026-11-16 17:23:21,866 - [32mINFO[0m livekit.agents - received job request [90m{"job_id": "AJ_ivkLZeYiFsVv", "dispatch_id": "AD_7nMJjD9eayTh", "room": "room_44f181a59f384ef6", "room_id": "RM_KbibyyHxPhBA", "agent_name": "avatar-agent", "resuming": false, "enable_recording": true}[0m
+DEBUG:livekit.agents:received assignment
+2026-11-16 17:23:21,925 - [36mDEBUG[0m livekit.agents - received assignment [90m{"agent_name": "avatar-agent", "room_id": "RM_KbibyyHxPhBA", "room": "room_44f181a59f384ef6", "job_id": "AJ_ivkLZeYiFsVv", "dispatch_id": "AD_7nMJjD9eayTh", "enable_recording": true}[0m
+WARNING:livekit.agents:no warmed process available for job, waiting for one to be created
+2026-11-16 17:23:21,926 - [33mWARNING[0m livekit.agents - no warmed process available for job, waiting for one to be created [90m{"job_id": "AJ_ivkLZeYiFsVv"}[0m
+INFO:livekit.agents:initializing job runner
+2026-11-16 17:23:21,930 - [32mINFO[0m livekit.agents - initializing job runner [90m{"tid": 24960}[0m
+DEBUG:asyncio:Using proactor: IocpProactor
+2026-11-16 17:23:21,932 - [36mDEBUG[0m asyncio - Using proactor: IocpProactor [90m[0m
+INFO:livekit.agents:job runner initialized
+2026-11-16 17:23:21,932 - [32mINFO[0m livekit.agents - job runner initialized [90m{"tid": 24960, "elapsed_time": 0.0}[0m
+INFO:mateo-agent:Starting Mateo for room: room_44f181a59f384ef6
+2026-11-16 17:23:21,940 - [32mINFO[0m mateo-agent - Starting Mateo for room: room_44f181a59f384ef6 [90m[0m
+ERROR:livekit.agents:unhandled exception while running the job task
+Traceback (most recent call last):
+  File "C:\Users\DELL\OneDrive\Documents\livekit-avatar-starter\.venv\Lib\site-packages\livekit\agents\ipc\job_proc_lazy_main.py", line 353, in _traceable_entrypoint
+    await self._job_entrypoint_fnc(job_ctx)
+  File "C:\Users\DELL\OneDrive\Documents\livekit-avatar-starter\agent\agent.py", line 596, in avatar_agent
+    register_skin_voice_bridge(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        room=ctx.room,
+        ^^^^^^^^^^^^^^
+        session=session,
+        ^^^^^^^^^^^^^^^^
+        session_is_ready=lambda: session_ready,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+TypeError: register_skin_voice_bridge() missing 1 required positional argument: 'restore_listening'
+2026-11-16 17:23:22,825 - [31mERROR[0m livekit.agents - unhandled exception while running the job task [90m[0m
+Traceback (most recent call last):
+  File "C:\Users\DELL\OneDrive\Documents\livekit-avatar-starter\.venv\Lib\site-packages\livekit\agents\ipc\job_proc_lazy_main.py", line 353, in _traceable_entrypoint
+    await self._job_entrypoint_fnc(job_ctx)
+  File "C:\Users\DELL\OneDrive\Documents\livekit-avatar-starter\agent\agent.py", line 596, in avatar_agent
+    register_skin_voice_bridge(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        room=ctx.room,
+        ^^^^^^^^^^^^^^
+        session=session,
+        ^^^^^^^^^^^^^^^^
+        session_is_ready=lambda: session_ready,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+TypeError: register_skin_voice_bridge() missing 1 required positional argument: 'restore_listening'
+WARNING:livekit.agents:event loop blocked for 872ms at "C:\Users\DELL\AppData\Local\Python\pythoncore-3.14-64\Lib\ssl.py", line 717, in create_default_context; synchronous work on the agent loop delays audio and turn handling, move it to a thread or an async client
+2026-11-16 17:23:22,828 - [33mWARNING[0m livekit.agents - event loop blocked for 872ms at "C:\Users\DELL\AppData\Local\Python\pythoncore-3.14-64\Lib\ssl.py", line 717, in create_default_context; synchronous work on the agent loop delays audio and turn handling, move it to a thread or an async client [90m{"duration": 0.8724, "threshold": 0.1, "gc_time": 0.0, "cpu_time": 0.8281, "task": "job_user_entrypoint", "stack": "# loop thread sampled 106ms into the stall\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\agent\\agent.py\", line 214, in avatar_agent\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\livekit\\agents\\inference\\llm.py\", line 367, in __init__\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\httpx2\\_client.py\", line 1498, in __init__\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\httpx2\\_client.py\", line 1539, in _init_transport\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\httpx2\\_transports\\default.py\", line 292, in __init__\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\httpx2\\_config.py\", line 35, in create_ssl_context\n  File \"C:\\Users\\DELL\\OneDrive\\Documents\\livekit-avatar-starter\\.venv\\Lib\\site-packages\\httpcore2\\_ssl.py\", line 22, in default_ssl_context\n  File \"C:\\Users\\DELL\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\ssl.py\", line 717, in create_default_context"}[0m
+DEBUG:livekit.agents:shutting down job task
+2026-11-16 17:23:22,830 - [36mDEBUG[0m livekit.agents - shutting down job task [90m{"reason": "job crashed", "user_initiated": false}[0m
+DEBUG:livekit.agents:configuring session recording
+2026-11-16 17:23:22,831 - [36mDEBUG[0m livekit.agents - configuring session recording [90m[0m
+DEBUG:livekit.agents:job exiting
+2026-11-16 17:23:22,841 - [36mDEBUG[0m livekit.agents - job exiting [90m{"reason": "job crashed", "tid": 24960, "job_id": "AJ_ivkLZeYiFsVv", "room": "room_44f181a59f384ef6", "room_id": "RM_KbibyyHxPhBA", "agent_name": "avatar-agent"}[0m
+DEBUG:livekit.agents:http_session(): closing the httpclient ctx
+2026-11-16 17:23:22,953 - [36mDEBUG[0m livekit.agents - http_session(): closing the httpclient ctx [90m[0m
+DEBUG:livekit.agents:http_session(): creating a new httpclient ctx
+2026-11-16 17:23:22,954 - [36mDEBUG[0m livekit.agents - http_session(): creating a new httpclient ctx [90m[0m
+INFO:livekit.agents:shutting down worker
+2026-11-16 17:26:16,952 - [32mINFO[0m livekit.agents - shutting down worker [90m{"id": "AW_wsdXbc7DXaKH"}[0m

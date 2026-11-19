@@ -1,0 +1,15 @@
+.skin-check {color:#f3f7ff;font:inherit;line-height:1.55}
+.skin-check h3 {font-size:1.3rem;margin:0 0 12px}
+.skin-check h4 {margin:18px 0 8px;font-size:1.05rem}
+.skin-check p {margin:10px 0}
+.skin-consent {display:flex;align-items:flex-start;gap:12px;margin:14px 0;cursor:pointer;color:#e5eefc}
+.skin-consent input {width:18px;height:18px;flex:none;margin:4px 0 0;accent-color:#3b82f6}
+.skin-actions {display:flex;flex-wrap:wrap;gap:12px;margin:18px 0}
+.skin-actions button {padding:12px 16px;border-radius:9px;background:#2563eb;border:1px solid #467ff9;color:white;font-weight:700;cursor:pointer}
+.skin-actions button:first-child {background:#203c5c;border-color:#436385}
+.skin-actions button:disabled {opacity:.55;cursor:not-allowed}
+.skin-error {color:#fecaca;background:#451b2a;border:1px solid #b91c1c;border-radius:8px;padding:10px}
+.skin-success {color:#b9f7d5;background:#123c32;border:1px solid #246b51;border-radius:8px;padding:10px}
+.skin-results {border:1px solid #34536c;background:#0f1d31;border-radius:12px;padding:18px;margin-top:18px}
+.skin-results li {margin-bottom:7px}
+.skin-disclaimer {font-size:.92rem;color:#d2dded}

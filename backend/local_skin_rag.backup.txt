@@ -1,0 +1,719 @@
+
+"""
+Mateo AI - Local Skin Vision + Medicine RAG
+
+Development-only pipeline:
+    Camera image
+        -> Local Ollama Qwen3-VL
+        -> Visible skin observations
+        -> Medicine FTS5/BM25 retrieval
+        -> Structured response
+
+Not a medical diagnosis or treatment system.
+All medicine documents remain draft_unreviewed.
+"""
+
+import argparse
+import base64
+import io
+import json
+import logging
+import os
+import re
+import socket
+import time
+import urllib.error
+import urllib.request
+
+from pathlib import Path
+from typing import Any
+
+from PIL import Image, ImageOps, UnidentifiedImageError
+
+from backend.medicine_dev_index import (
+    DB_PATH,
+    search_documents,
+)
+
+
+# -------------------------------------------------
+# Configuration
+# -------------------------------------------------
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(levelname)s: %(message)s",
+)
+
+logger = logging.getLogger("mateo-local-skin-rag")
+
+OLLAMA_MODEL = os.getenv(
+    "MATEO_LOCAL_VISION_MODEL",
+    "qwen3-vl:2b",
+)
+
+OLLAMA_API = os.getenv(
+    "MATEO_OLLAMA_API",
+    "http://127.0.0.1:11434/api/chat",
+)
+
+OLLAMA_TIMEOUT = int(
+    os.getenv("MATEO_OLLAMA_TIMEOUT", "270")
+)
+
+MAX_IMAGE_DIMENSION = int(
+    os.getenv("MATEO_IMAGE_DIMENSION", "384")
+)
+
+MAX_IMAGE_BYTES = 5 * 1024 * 1024
+
+MAX_OUTPUT_TOKENS = int(
+    os.getenv("MATEO_VISION_TOKENS", "512")
+)
+
+OLLAMA_CONTEXT_SIZE = int(
+    os.getenv("MATEO_OLLAMA_CONTEXT", "2048")
+)
+
+OLLAMA_THREADS = int(
+    os.getenv("MATEO_OLLAMA_THREADS", "4")
+)
+
+ALLOWED_FEATURES = {
+    "redness",
+    "dryness",
+    "peeling",
+    "bumps",
+    "rash",
+}
+
+
+# -------------------------------------------------
+# Vision prompt
+# -------------------------------------------------
+
+VISION_PROMPT = """
+Inspect the image for visible facial skin features.
+
+Describe only what is visually observable.
+Do not diagnose disease.
+Do not recommend medication.
+Do not identify the person.
+Do not infer symptoms such as itching or pain.
+
+Return ONLY this JSON object:
+
+{
+  "face_visible": true,
+  "image_usable": true,
+  "visible_features": ["redness", "bumps"],
+  "quality_note": "Face clearly visible"
+}
+
+Rules:
+- Set booleans based on the actual image.
+- The feature list must contain only:
+  redness, dryness, peeling, bumps, rash.
+- Return an empty list if no feature is clear.
+- Do not invent features.
+- Use a short image-quality note.
+- No markdown.
+- No explanation.
+- No reasoning text.
+"""
+
+
+# -------------------------------------------------
+# Image preparation
+# -------------------------------------------------
+
+def prepare_image(
+    image_bytes: bytes,
+) -> tuple[bytes, dict[str, int]]:
+
+    if not image_bytes:
+        raise ValueError("Image is empty.")
+
+    if len(image_bytes) > MAX_IMAGE_BYTES:
+        raise ValueError(
+            "Image exceeds the 5 MB limit."
+        )
+
+    try:
+        with Image.open(
+            io.BytesIO(image_bytes)
+        ) as source:
+
+            if source.width * source.height > 12_000_000:
+                raise ValueError(
+                    "Image resolution is too large."
+                )
+
+            source.load()
+
+            image = ImageOps.exif_transpose(
+                source
+            ).convert("RGB")
+
+    except (
+        UnidentifiedImageError,
+        OSError,
+        Image.DecompressionBombError,
+    ) as exc:
+        raise ValueError(
+            "Invalid or unsupported image."
+        ) from exc
+
+    image.thumbnail(
+        (
+            MAX_IMAGE_DIMENSION,
+            MAX_IMAGE_DIMENSION,
+        ),
+        Image.Resampling.LANCZOS,
+    )
+
+    output = io.BytesIO()
+
+    image.save(
+        output,
+        format="JPEG",
+        quality=85,
+        optimize=True,
+    )
+
+    processed = output.getvalue()
+
+    size = {
+        "width": image.width,
+        "height": image.height,
+    }
+
+    logger.info(
+        "Image resized to %sx%s (%s bytes).",
+        image.width,
+        image.height,
+        len(processed),
+    )
+
+    if len(processed) < 2000:
+        logger.warning(
+            "Processed image is unusually small. "
+            "Check whether the camera frame is "
+            "blank, dark, or nearly uniform."
+        )
+
+    return processed, size
+
+
+# -------------------------------------------------
+# JSON parsing
+# -------------------------------------------------
+
+def parse_model_json(
+    content: str,
+) -> dict[str, Any]:
+
+    content = content.strip()
+
+    if not content:
+        raise RuntimeError(
+            "The vision model returned empty content."
+        )
+
+    # Remove optional markdown fences.
+    content = re.sub(
+        r"^```(?:json)?\s*",
+        "",
+        content,
+        flags=re.IGNORECASE,
+    )
+
+    content = re.sub(
+        r"\s*```$",
+        "",
+        content,
+    )
+
+    try:
+        parsed = json.loads(content)
+
+        if isinstance(parsed, dict):
+            return parsed
+
+    except json.JSONDecodeError:
+        pass
+
+    # Recover a single JSON object when the
+    # model adds unwanted surrounding text.
+    decoder = json.JSONDecoder()
+
+    for match in re.finditer(r"\{", content):
+        try:
+            candidate, _ = decoder.raw_decode(
+                content[match.start():]
+            )
+
+            if isinstance(candidate, dict):
+                return candidate
+
+        except json.JSONDecodeError:
+            continue
+
+    raise RuntimeError(
+        "The vision model did not return valid JSON. "
+        "Check the Ollama completion diagnostics."
+    )
+
+
+# -------------------------------------------------
+# Ollama inference
+# -------------------------------------------------
+
+def call_ollama(
+    image_bytes: bytes,
+) -> dict[str, Any]:
+
+    encoded = base64.b64encode(
+        image_bytes
+    ).decode("ascii")
+
+    payload = {
+        "model": OLLAMA_MODEL,
+        "stream": False,
+        "format": "json",
+        "think": False,
+        "keep_alive": "5m",
+        "options": {
+            "temperature": 0,
+            "num_predict": MAX_OUTPUT_TOKENS,
+            "num_ctx": OLLAMA_CONTEXT_SIZE,
+            "num_thread": OLLAMA_THREADS,
+        },
+        "messages": [
+            {
+                "role": "user",
+                "content": VISION_PROMPT,
+                "images": [encoded],
+            }
+        ],
+    }
+
+    request = urllib.request.Request(
+        OLLAMA_API,
+        data=json.dumps(payload).encode("utf-8"),
+        headers={
+            "Content-Type": "application/json",
+        },
+        method="POST",
+    )
+
+    logger.info(
+        "Running %s on local Ollama...",
+        OLLAMA_MODEL,
+    )
+
+    started = time.monotonic()
+
+    try:
+        with urllib.request.urlopen(
+            request,
+            timeout=OLLAMA_TIMEOUT,
+        ) as response:
+
+            raw_response = response.read()
+
+    except urllib.error.HTTPError as exc:
+        detail = exc.read().decode(
+            "utf-8",
+            errors="replace",
+        )
+
+        logger.error(
+            "Ollama HTTP error %s: %s",
+            exc.code,
+            detail[:500],
+        )
+
+        raise RuntimeError(
+            f"Ollama returned HTTP {exc.code}."
+        ) from exc
+
+    except (
+        urllib.error.URLError,
+        socket.timeout,
+        TimeoutError,
+    ) as exc:
+
+        logger.error(
+            "Cannot reach Ollama or request timed out: %s",
+            exc,
+        )
+
+        raise RuntimeError(
+            "Ollama is unavailable or inference timed out."
+        ) from exc
+
+    elapsed = time.monotonic() - started
+
+    logger.info(
+        "Ollama responded in %.1f seconds.",
+        elapsed,
+    )
+
+    try:
+        result = json.loads(
+            raw_response.decode("utf-8")
+        )
+
+    except (
+        ValueError,
+        UnicodeDecodeError,
+    ) as exc:
+
+        raise RuntimeError(
+            "Ollama returned an invalid API response."
+        ) from exc
+
+    if not isinstance(result, dict):
+        raise RuntimeError(
+            "Ollama returned an unexpected response."
+        )
+
+    message = result.get("message") or {}
+
+    if not isinstance(message, dict):
+        message = {}
+
+    content = message.get("content") or ""
+    thinking = message.get("thinking") or ""
+
+    logger.info(
+        "Ollama diagnostics: "
+        "done_reason=%s, "
+        "eval_count=%s, "
+        "prompt_eval_count=%s, "
+        "thinking_length=%s, "
+        "content_length=%s",
+        result.get("done_reason"),
+        result.get("eval_count"),
+        result.get("prompt_eval_count"),
+        len(str(thinking)),
+        len(str(content)),
+    )
+
+    if not isinstance(content, str):
+        raise RuntimeError(
+            "Ollama returned non-text content."
+        )
+
+    if not content.strip():
+
+        done_reason = result.get("done_reason")
+
+        if thinking:
+            logger.warning(
+                "Ollama produced reasoning text but "
+                "no final JSON content."
+            )
+
+        if done_reason == "length":
+            raise RuntimeError(
+                "Ollama exhausted its output token "
+                "budget before returning JSON. "
+                "Reduce the prompt or increase "
+                "MATEO_VISION_TOKENS."
+            )
+
+        raise RuntimeError(
+            "Ollama returned empty final content. "
+            f"Completion reason: {done_reason}. "
+            "Check the input camera image and "
+            "model diagnostics."
+        )
+
+    return parse_model_json(content)
+
+
+# -------------------------------------------------
+# Normalize visible skin features
+# -------------------------------------------------
+
+def normalize_features(
+    raw_features: Any,
+) -> list[str]:
+
+    if not isinstance(raw_features, list):
+        return []
+
+    aliases = {
+        "acne": "bumps",
+        "pimples": "bumps",
+        "pimple": "bumps",
+        "spots": "bumps",
+        "red": "redness",
+        "flaking": "peeling",
+        "flaky": "peeling",
+        "dry": "dryness",
+    }
+
+    features: list[str] = []
+
+    for item in raw_features:
+
+        if not isinstance(item, str):
+            continue
+
+        normalized = item.strip().lower()
+
+        normalized = aliases.get(
+            normalized,
+            normalized,
+        )
+
+        if (
+            normalized in ALLOWED_FEATURES
+            and normalized not in features
+        ):
+            features.append(normalized)
+
+    return features
+
+
+# -------------------------------------------------
+# Vision observation extraction
+# -------------------------------------------------
+
+def analyze_local_image(
+    image_bytes: bytes,
+) -> dict[str, Any]:
+
+    processed, image_size = prepare_image(
+        image_bytes
+    )
+
+    model_result = call_ollama(
+        processed
+    )
+
+    face_visible = (
+        model_result.get("face_visible") is True
+    )
+
+    image_usable = (
+        model_result.get("image_usable") is True
+    )
+
+    features = normalize_features(
+        model_result.get("visible_features", [])
+    )
+
+    if not face_visible or not image_usable:
+        features = []
+
+    quality_note = model_result.get(
+        "quality_note",
+        "",
+    )
+
+    if not isinstance(quality_note, str):
+        quality_note = ""
+
+    if not quality_note.strip():
+        quality_note = (
+            "Image quality could not be determined."
+        )
+
+    return {
+        "face_visible": face_visible,
+        "image_usable": image_usable,
+        "visible_features": features,
+        "quality_note": quality_note.strip()[:200],
+        "model": OLLAMA_MODEL,
+        "processed_image_size": image_size,
+    }
+
+
+# -------------------------------------------------
+# Medicine RAG retrieval
+# -------------------------------------------------
+
+def retrieve_medicine_references(
+    features: list[str],
+    limit: int = 5,
+) -> dict[str, Any]:
+
+    retrieval_query = " ".join(features)
+
+    output: dict[str, Any] = {
+        "status": "draft_unreviewed",
+        "retrieval_query": retrieval_query,
+        "total_results": 0,
+        "results": [],
+    }
+
+    if not features:
+        logger.info(
+            "No visible features. Skipping "
+            "Medicine RAG retrieval."
+        )
+
+        return output
+
+    database_path = Path(DB_PATH)
+
+    if not database_path.is_file():
+        raise RuntimeError(
+            "Medicine development index missing. "
+            "Run: python -m "
+            "backend.medicine_dev_index index"
+        )
+
+    try:
+        matches = search_documents(
+            retrieval_query,
+            limit=limit,
+        )
+
+    except Exception as exc:
+        logger.exception(
+            "Medicine RAG retrieval failed."
+        )
+
+        raise RuntimeError(
+            "Medicine RAG search failed. "
+            "Check the development index."
+        ) from exc
+
+    records = []
+
+    for match in matches:
+        # Existing development index returns:
+        # (filename, page_number, excerpt, score)
+        if len(match) < 4:
+            continue
+
+        filename, page, excerpt, score = match[:4]
+
+        records.append(
+            {
+                "source": str(filename),
+                "page": page,
+                "excerpt": str(excerpt),
+                "bm25_score": float(score),
+                "review_status": "draft_unreviewed",
+            }
+        )
+
+    output["results"] = records
+    output["total_results"] = len(records)
+
+    logger.info(
+        "Medicine RAG returned %s references.",
+        len(records),
+    )
+
+    return output
+
+
+# -------------------------------------------------
+# Full Skin Vision + Medicine RAG pipeline
+# -------------------------------------------------
+
+def analyze_skin_and_retrieve(
+    image_bytes: bytes,
+) -> dict[str, Any]:
+
+    started = time.monotonic()
+
+    logger.info(
+        "Starting local skin vision + RAG pipeline."
+    )
+
+    observations = analyze_local_image(
+        image_bytes
+    )
+
+    if (
+        observations["image_usable"]
+        and observations["face_visible"]
+    ):
+        features = observations["visible_features"]
+    else:
+        features = []
+
+    medicine_results = retrieve_medicine_references(
+        features,
+        limit=5,
+    )
+
+    elapsed = time.monotonic() - started
+
+    logger.info(
+        "Local skin pipeline completed in %.1f seconds.",
+        elapsed,
+    )
+
+    return {
+        "success": True,
+        "status": "development_local_skin_rag",
+        "development_only": True,
+        "vision_provider": "local_ollama",
+        "skin_observations": observations,
+        "medicine_rag": medicine_results,
+        "disclaimer": (
+            "Experimental visual observations only. "
+            "Not a medical diagnosis. "
+            "These references are unreviewed "
+            "development materials, not medical "
+            "or treatment recommendations."
+        ),
+        "processing_time_seconds": round(
+            elapsed,
+            1,
+        ),
+    }
+
+
+# -------------------------------------------------
+# CLI
+# -------------------------------------------------
+
+def main():
+
+    parser = argparse.ArgumentParser(
+        description=(
+            "Mateo Local Skin Vision + Medicine RAG"
+        )
+    )
+
+    parser.add_argument(
+        "--image",
+        required=True,
+        help="Path to a JPG, PNG or WebP image.",
+    )
+
+    args = parser.parse_args()
+
+    path = Path(args.image)
+
+    if not path.is_file():
+        raise SystemExit(
+            f"Image not found: {path}"
+        )
+
+    result = analyze_skin_and_retrieve(
+        path.read_bytes()
+    )
+
+    print()
+    print(
+        json.dumps(
+            result,
+            indent=2,
+            ensure_ascii=False,
+        )
+    )
+
+
+if __name__ == "__main__":
+    main()

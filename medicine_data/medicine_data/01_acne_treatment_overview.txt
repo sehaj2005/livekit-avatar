@@ -1,0 +1,28 @@
+TITLE: Acne: Treatment Classes and Safety Overview
+DOCUMENT STATUS: DRAFT FOR CLINICAL REVIEW — NOT APPROVED FOR PATIENT-SPECIFIC RECOMMENDATIONS
+Prepared: 2026-11-12
+Reviewer: NOT YET ASSIGNED
+Use: Source-grounded medicine information retrieval only. These notes do not establish a diagnosis or authorize a prescription. Local rules on medicine availability differ. Review against current official prescribing information before clinical deployment.
+
+Acne vulgaris may involve comedones (blackheads or whiteheads), inflamed bumps and sometimes deeper lesions. Similar-looking facial changes may have other causes; a photograph alone is not enough for a diagnosis.
+
+Treatments described in dermatology guidance include benzoyl peroxide, topical retinoids (such as adapalene), salicylic acid, azelaic acid, and selected clinician-directed prescription therapies. Choice depends on diagnosis, severity, skin sensitivity, medication history, pregnancy status and other context.
+
+Benzoyl peroxide is used for acne and can cause dryness, stinging, peeling or irritation. It can bleach fabric or hair; avoid contact with eyes and damaged skin.
+
+Topical retinoids help with comedonal acne but may cause dryness or irritation. Topical retinoids should not be used during pregnancy or when planning pregnancy; professional guidance is important.
+
+Salicylic acid is used in some acne products to exfoliate and address blocked pores. Excessive combinations of exfoliating or active products may worsen irritation.
+
+Azelaic acid is another acne treatment discussed in clinical references; possible side effects include temporary burning, itching, dryness or redness.
+
+Prescription topical or oral antibiotics and isotretinoin are clinician-managed treatments, not automatic suggestions from Mateo. Antibiotic stewardship is important.
+
+Basic non-medicated care: gentle cleansing, avoiding picking or abrasive scrubbing, and using suitable non-comedogenic products. Seek professional assessment for persistent, scarring, severe, painful, or worsening lesions.
+
+RAG POLICY: Retrieve these passages as background information only. Do not infer a medicine choice or dose from a skin snapshot. Ask a clinician or pharmacist to assess contraindications and suitability.
+
+SOURCES:
+American Academy of Dermatology, Acne clinical guideline: https://www.aad.org/member/clinical-quality/guidelines/acne/
+American Academy of Dermatology, Acne diagnosis and treatment: https://www.aad.org/public/diseases/acne/derm-treat/treat/
+NHS, Acne overview: https://www.nhs.uk/conditions/acne/

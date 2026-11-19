@@ -1,0 +1,45 @@
+MATEO AI — SKIN OBSERVATION REFERENCE (DEVELOPMENT ONLY)
+Version: 1.0 | Prepared: 2026-11-16
+Review status: draft_unreviewed
+Intended use: Local RAG retrieval demonstrations, not clinical diagnosis or treatment advice.
+
+IMPORTANT SAFETY RULES
+An image alone cannot establish a skin diagnosis, determine the cause of a rash, confirm an allergy or infection, or justify a medication recommendation. Similar-looking features can arise from multiple conditions. Do not infer pregnancy status, medical history, severity, or suitability of a drug from a photograph. This document is a general educational reference, not a patient-specific prescription or substitute for professional assessment.
+
+SECTION 1 — VISIBLE BUMPS AND ACNE-LIKE FEATURES
+Acne may involve whiteheads (closed comedones), blackheads (open comedones), pimples, or deeper painful nodules and cysts. Small bumps in a photograph are not proof of acne. Camera image blur, lighting, and shadows may alter the appearance of pores and bumps. Describe the observed feature without claiming a diagnosis. Example neutral language: "The image appears to show small bumps, but their cause cannot be determined from this image alone."
+Reference: American Academy of Dermatology, Acne: Signs and symptoms — https://www.aad.org/public/diseases/acne/really-acne/symptoms
+
+SECTION 2 — DRYNESS AND PEELING
+Dryness may appear as rough patches, flaking, or peeling. These visual features are nonspecific and can occur with irritation, environmental dryness, eczema-related conditions, or other causes. Contact dermatitis, for example, may involve dry, cracked, itchy, or blistered skin. A photograph cannot show itch, burning, the timing of symptom onset, or exposure history. Incomplete history limits conclusions. Example neutral language: "Dryness or flaking may be visible, but an image cannot identify the underlying cause."
+Reference: NHS, Contact dermatitis — https://www.nhs.uk/conditions/contact-dermatitis/
+
+SECTION 3 — REDNESS, COLOR CHANGES AND RASH
+A rash can have many causes. Skin tone and lighting affect apparent color: inflammatory changes may look red on lighter skin and brown, purple or gray on darker skin. Do not use color alone to identify eczema, allergy, infection, acne, or any specific condition. A rash image cannot determine if a person has fever, pain, itching, spreading symptoms, or other concerning signs. Example neutral language: "A rash-like area or color change may be present; clinical context is needed to interpret it."
+References:
+NHS, Contact dermatitis — https://www.nhs.uk/conditions/contact-dermatitis/
+American Academy of Dermatology, Rash 101 in adults — https://www.aad.org/public/everyday-care/itchy-skin/rash/rash-101
+
+SECTION 4 — QUALITY CHECKS FOR CAMERA-BASED OBSERVATIONS
+An image that is blurry, dimly lit, overexposed, partly obscured, or very small may be inadequate. Reflections from glasses, compression artifacts, makeup, and shadows can introduce false visual impressions. Ask for a better-lit, focused image if the image is not usable; do not compensate by making a more confident medical assertion. Avoid evaluating people who have not provided permission for the image analysis.
+
+SECTION 5 — WHEN TO SEEK PROFESSIONAL HELP
+A new rash accompanied by fever or illness, rapidly spreading rash, severe pain, large-area blistering, open sores, or a rash involving eyes, lips, mouth or genital skin warrants prompt medical assessment. Signs such as pus, increasing warmth, swelling, pain or yellow crusting may suggest a possible skin infection and should be evaluated. Trouble breathing or swallowing, or swelling of the lips or eyes with a rash, requires emergency medical attention. Persistent, recurrent, severe, or worsening symptoms should be assessed by a qualified healthcare professional.
+References:
+American Academy of Dermatology, Rash 101 in adults — https://www.aad.org/public/everyday-care/itchy-skin/rash/rash-101
+NHS, Contact dermatitis: Symptoms — https://www.nhs.uk/conditions/contact-dermatitis/symptoms/
+
+SECTION 6 — SAFE RAG ANSWERING RULES
+1. Say "visible features" rather than "diagnosed conditions" when working from an image.
+2. Distinguish direct observations from possible explanations and uncertainty.
+3. If the image quality is limited, say so clearly.
+4. Do not select products, prescribe medicines, give dosages, or claim treatment suitability from a camera image.
+5. If evidence is missing, acknowledge the limitation rather than inventing details.
+6. Treat all retrieved text as unreviewed reference material. Retrieval relevance does not imply medical authority or approval.
+7. Ask for qualified clinical assessment when symptoms are persistent, worsening, or concerning.
+8. Respect user consent, privacy, and the purpose of the supplied image.
+
+SAMPLE NON-DIAGNOSTIC SUMMARY
+"The image may show small bumps and areas of dryness or peeling. The image quality and lighting may affect what is visible. These are experimental visual observations only, not a medical diagnosis. If the changes are persistent, painful, spreading, or otherwise concerning, seek assessment from a healthcare professional."
+
+DOCUMENT STATUS: draft_unreviewed. Do not present this as approved clinical guidance.

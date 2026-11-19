@@ -1,0 +1,650 @@
+.admin-page {
+  --admin-bg: #0b1120;
+  --admin-surface: #111c2e;
+  --admin-surface-light: #18263d;
+  --admin-border: #283750;
+  --admin-text: #f8fafc;
+  --admin-muted: #94a3b8;
+  --admin-primary: #3b82f6;
+  --admin-primary-hover: #2563eb;
+  --admin-success: #22c55e;
+  --admin-danger: #ef4444;
+
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--admin-bg);
+  color: var(--admin-text);
+  font-family: Inter, Arial, sans-serif;
+}
+
+.admin-page *,
+.admin-page *::before,
+.admin-page *::after {
+  box-sizing: border-box;
+}
+
+
+/* ==========================================
+   2. Admin Login Page
+========================================== */
+
+.admin-login {
+  width: min(440px, calc(100% - 32px));
+  margin: auto;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 18px;
+  border: 1px solid var(--admin-border);
+  border-radius: 18px;
+  background: var(--admin-surface);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+}
+
+.admin-login-icon {
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: rgba(59, 130, 246, 0.12);
+  font-size: 30px;
+}
+
+.admin-login h1 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.admin-login > p {
+  margin: 0;
+  color: var(--admin-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.admin-login form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.admin-login label {
+  color: #cbd5e1;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.admin-login input {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  border: 1px solid #41516a;
+  border-radius: 10px;
+  background: #0b1424;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.admin-login input::placeholder {
+  color: #64748b;
+}
+
+.admin-login input:focus {
+  outline: 2px solid var(--admin-primary);
+  outline-offset: 2px;
+}
+
+.admin-login button {
+  min-height: 48px;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 10px;
+  background: var(--admin-primary);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.admin-login button:hover:not(:disabled) {
+  background: var(--admin-primary-hover);
+}
+
+.admin-login button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.admin-login > a {
+  align-self: center;
+  margin-top: 8px;
+  color: #93c5fd;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.admin-login > a:hover {
+  text-decoration: underline;
+}
+
+
+/* ==========================================
+   3. Admin Header
+========================================== */
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 22px 32px;
+  border-bottom: 1px solid var(--admin-border);
+  background: #101a2c;
+}
+
+.admin-header h1 {
+  margin: 0 0 5px;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.admin-header p {
+  margin: 0;
+  color: var(--admin-muted);
+  font-size: 13px;
+}
+
+.admin-header-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.admin-header-actions a,
+.admin-header-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 39px;
+  padding: 10px 15px;
+  border: 1px solid #344862;
+  border-radius: 9px;
+  background: #1b2b43;
+  color: #f8fafc;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.admin-header-actions a:hover,
+.admin-header-actions button:hover:not(:disabled) {
+  background: #294365;
+}
+
+.admin-header-actions .admin-logout {
+  border-color: #7f3030;
+  background: #652525;
+  color: #fecaca;
+}
+
+.admin-header-actions .admin-logout:hover {
+  background: #812d2d;
+}
+
+.admin-header-actions button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+
+/* ==========================================
+   4. Main Dashboard Content
+========================================== */
+
+.admin-content {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.admin-section {
+  min-width: 0;
+  padding: 26px;
+  border: 1px solid var(--admin-border);
+  border-radius: 16px;
+  background: var(--admin-surface);
+}
+
+.admin-section h2 {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.admin-section h3 {
+  margin: 25px 0 15px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.admin-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.admin-section-header > span {
+  color: var(--admin-muted);
+  font-size: 12px;
+}
+
+.admin-section-header button {
+  padding: 9px 14px;
+  border: 1px solid #3c506b;
+  border-radius: 9px;
+  background: #1c304b;
+  color: #ffffff;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.admin-section-header button:hover {
+  background: #274466;
+}
+
+.admin-muted {
+  margin: 8px 0 16px;
+  color: var(--admin-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+
+/* ==========================================
+   5. KPI Statistics Grid
+========================================== */
+
+.admin-stats-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.admin-stat-card {
+  min-width: 0;
+  padding: 21px;
+  border: 1px solid #30425c;
+  border-radius: 13px;
+  background: var(--admin-surface-light);
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.admin-stat-card:hover {
+  border-color: #4b6c9c;
+  transform: translateY(-2px);
+}
+
+.admin-stat-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.admin-stat-top > span:first-child {
+  color: #cbd5e1;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.admin-stat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 9px;
+  background: rgba(59, 130, 246, 0.12);
+  font-size: 19px;
+}
+
+.admin-stat-value {
+  display: block;
+  color: #ffffff;
+  font-size: 30px;
+  font-weight: 750;
+  letter-spacing: -1px;
+  overflow-wrap: anywhere;
+}
+
+.admin-stat-card > p {
+  margin: 11px 0 0;
+  color: var(--admin-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+
+/* ==========================================
+   6. AI Cost Breakdown
+========================================== */
+
+.admin-cost-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.admin-cost-card {
+  min-width: 0;
+  padding: 22px;
+  border: 1px solid #30425c;
+  border-radius: 13px;
+  background: #16253b;
+}
+
+.admin-cost-card h3 {
+  margin: 0 0 18px;
+  color: #cbd5e1;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.admin-cost-card strong {
+  display: block;
+  color: #93c5fd;
+  font-size: 27px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.admin-cost-card p {
+  margin: 12px 0 0;
+  color: var(--admin-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+
+/* ==========================================
+   7. Meeting and Participant Tables
+========================================== */
+
+.admin-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--admin-border);
+  border-radius: 12px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.admin-table thead {
+  background: #1c2c44;
+}
+
+.admin-table th {
+  padding: 15px 17px;
+  color: #cbd5e1;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.admin-table td {
+  padding: 16px 17px;
+  border-top: 1px solid #293a52;
+  color: #e2e8f0;
+  font-size: 13px;
+}
+
+.admin-table tbody tr:hover {
+  background: rgba(59, 130, 246, 0.06);
+}
+
+.admin-table td[colspan] {
+  padding: 28px;
+  color: var(--admin-muted);
+  text-align: center;
+}
+
+.admin-table td button {
+  padding: 8px 13px;
+  border: 1px solid #365a89;
+  border-radius: 8px;
+  background: #1e3a5f;
+  color: #bfdbfe;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.admin-table td button:hover {
+  background: #285181;
+}
+
+
+/* ==========================================
+   8. Meeting Status Badges
+========================================== */
+
+.admin-status {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 11px;
+  border: 1px solid #475569;
+  border-radius: 999px;
+  background: rgba(100, 116, 139, 0.14);
+  color: #cbd5e1;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.admin-status.active {
+  border-color: rgba(34, 197, 94, 0.4);
+  background: rgba(34, 197, 94, 0.12);
+  color: #86efac;
+}
+
+
+/* ==========================================
+   9. Error Messages
+========================================== */
+
+.admin-error {
+  padding: 13px 16px;
+  border: 1px solid rgba(239, 68, 68, 0.45);
+  border-radius: 10px;
+  background: rgba(127, 29, 29, 0.2);
+  color: #fecaca;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+
+/* ==========================================
+   10. Buttons and Focus States
+========================================== */
+
+.admin-page button {
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.admin-page button:focus-visible,
+.admin-page a:focus-visible,
+.admin-page input:focus-visible {
+  outline: 2px solid #60a5fa;
+  outline-offset: 3px;
+}
+
+
+/* ==========================================
+   11. Tablet Responsive Layout
+========================================== */
+
+@media (max-width: 1000px) {
+
+  .admin-stats-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .admin-cost-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .admin-header {
+    padding: 20px;
+  }
+
+  .admin-content {
+    padding: 20px;
+  }
+
+}
+
+
+/* ==========================================
+   12. Mobile Responsive Layout
+========================================== */
+
+@media (max-width: 600px) {
+
+  .admin-login {
+    padding: 28px 22px;
+  }
+
+  .admin-login h1 {
+    font-size: 22px;
+  }
+
+  .admin-header {
+    padding: 18px 15px;
+  }
+
+  .admin-header h1 {
+    font-size: 20px;
+  }
+
+  .admin-header-actions {
+    width: 100%;
+  }
+
+  .admin-header-actions a,
+  .admin-header-actions button {
+    flex: 1;
+  }
+
+  .admin-content {
+    padding: 14px;
+    gap: 16px;
+  }
+
+  .admin-section {
+    padding: 18px 15px;
+  }
+
+  .admin-stats-grid,
+  .admin-cost-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .admin-stat-value {
+    font-size: 27px;
+  }
+
+  .admin-cost-card strong {
+    font-size: 24px;
+  }
+
+  .admin-table {
+    min-width: 620px;
+  }
+
+}
+
+
+/* ==========================================
+   13. Scrollbar Styling
+========================================== */
+
+.admin-table-wrapper::-webkit-scrollbar {
+  height: 8px;
+}
+
+.admin-table-wrapper::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background: #405472;
+}
+
+.admin-table-wrapper::-webkit-scrollbar-track {
+  background: #111c2e;
+}
+
+
+.admin-header-actions .admin-reset-button {
+  min-height: 39px;
+  padding: 10px 15px;
+  border: 1px solid #dc2626;
+  border-radius: 9px;
+  background: #991b1b;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.admin-header-actions .admin-reset-button:hover:not(:disabled) {
+  background: #b91c1c;
+  border-color: #ef4444;
+}
+
+.admin-header-actions .admin-reset-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.admin-header-actions .admin-reset-button:focus-visible {
+  outline: 2px solid #f87171;
+  outline-offset: 3px;
+}
+

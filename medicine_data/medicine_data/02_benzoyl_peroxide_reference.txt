@@ -1,0 +1,20 @@
+TITLE: Benzoyl Peroxide: Medicine Reference
+DOCUMENT STATUS: DRAFT FOR CLINICAL REVIEW — NOT APPROVED FOR PATIENT-SPECIFIC RECOMMENDATIONS
+Prepared: 2026-11-12
+Reviewer: NOT YET ASSIGNED
+Use: Source-grounded medicine information retrieval only. These notes do not establish a diagnosis or authorize a prescription. Local rules on medicine availability differ. Review against current official prescribing information before clinical deployment.
+
+ACTIVE INGREDIENT: Benzoyl peroxide.
+CLASS: Topical acne therapy; available in gels, washes and sometimes combinations depending on location.
+INDICATION CONTEXT: Used for acne, including inflamed spots and blocked pores. A clinician or pharmacist should confirm suitability.
+LIMITATIONS: Visible bumps are not proof of acne. Do not recommend benzoyl peroxide solely on the basis of camera images.
+POTENTIAL ADVERSE EFFECTS: Dryness, peeling, irritation, mild burning or stinging. Serious allergic symptoms need urgent care.
+IMPORTANT PRECAUTIONS: Avoid eyes, mouth, cuts and damaged/infected skin; may bleach fabric/hair. Follow labeled instructions and seek pharmacist/clinician advice when unsure. Sensitivity to sunlight may increase; use sun protection.
+INTERACTION/CONTEXT CHECKS: Ask about existing topical acne products and skin irritation. Do not combine multiple irritating ingredients without an appropriate treatment plan.
+PATIENT-SPECIFIC DOSAGE: NOT PROVIDED. Product form, strength, labeling and individual considerations require professional review.
+WHEN TO ESCALATE: Persistent or worsening acne; marked irritation; signs of infection; new or worsening severe swelling or breathing difficulty (emergency).
+RAG POLICY: May describe benzoyl peroxide as a treatment *used for diagnosed acne* with precautions; must not recommend a particular brand, regimen or strength from an image alone.
+
+SOURCES:
+NHS, Benzoyl peroxide: https://www.nhs.uk/medicines/benzoyl-peroxide/
+AAD, Acne clinical guideline: https://www.aad.org/member/clinical-quality/guidelines/acne/

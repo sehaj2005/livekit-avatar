@@ -1,0 +1,92 @@
+{
+  "document_status": "draft_for_clinical_review",
+  "reviewer": null,
+  "prepared_on": "2026-11-12",
+  "purpose": "retrieval_and_citation_only_not_patient_specific_recommendations",
+  "items": [
+    {
+      "id": "MED-BPO-001",
+      "ingredient": "benzoyl peroxide",
+      "category": "topical acne treatment",
+      "used_for": "Clinically assessed acne; not all facial bumps",
+      "cautions": [
+        "may cause dryness peeling and irritation",
+        "avoid eyes and damaged skin",
+        "may bleach fabrics and hair"
+      ],
+      "personalized_dose": null,
+      "clinical_review_required": true,
+      "status": "draft_unreviewed",
+      "sources": [
+        "https://www.nhs.uk/medicines/benzoyl-peroxide/",
+        "https://www.aad.org/member/clinical-quality/guidelines/acne/"
+      ]
+    },
+    {
+      "id": "MED-RET-002",
+      "ingredient": "topical retinoids including adapalene",
+      "category": "topical acne treatment",
+      "used_for": "Clinically assessed acne including comedonal lesions",
+      "cautions": [
+        "do not use during pregnancy or when planning pregnancy",
+        "may cause dryness and irritation",
+        "product regulation and prescription requirements vary"
+      ],
+      "personalized_dose": null,
+      "clinical_review_required": true,
+      "status": "draft_unreviewed",
+      "sources": [
+        "https://www.aad.org/public/diseases/acne/derm-treat/treat/",
+        "https://www.medicinesinpregnancy.org/leaflets-a-z/isotretinoin-gel/"
+      ]
+    },
+    {
+      "id": "MED-AZA-003",
+      "ingredient": "azelaic acid",
+      "category": "topical acne treatment",
+      "used_for": "Clinically assessed acne",
+      "cautions": [
+        "possible burning stinging itching dryness or redness",
+        "check individual product labeling and suitability"
+      ],
+      "personalized_dose": null,
+      "clinical_review_required": true,
+      "status": "draft_unreviewed",
+      "sources": [
+        "https://www.nhs.uk/conditions/acne/treatment/"
+      ]
+    },
+    {
+      "id": "MED-SAL-004",
+      "ingredient": "salicylic acid",
+      "category": "topical exfoliant in some acne products",
+      "used_for": "Some acne products address blocked pores",
+      "cautions": [
+        "potential skin irritation particularly when layered with other active products",
+        "not a diagnosis or recommendation based on an image"
+      ],
+      "personalized_dose": null,
+      "clinical_review_required": true,
+      "status": "draft_unreviewed",
+      "sources": [
+        "https://www.aad.org/public/diseases/acne/derm-treat/treat/"
+      ]
+    },
+    {
+      "id": "MED-EMO-005",
+      "ingredient": "emollients / moisturizers",
+      "category": "skin barrier care",
+      "used_for": "Skin dryness and contact dermatitis management",
+      "cautions": [
+        "some fragrances or ingredients may irritate sensitive skin",
+        "consult pharmacist or clinician for persistent or severe dermatitis"
+      ],
+      "personalized_dose": null,
+      "clinical_review_required": true,
+      "status": "draft_unreviewed",
+      "sources": [
+        "https://www.nhs.uk/conditions/contact-dermatitis/treatment/"
+      ]
+    }
+  ]
+}

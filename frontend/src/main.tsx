@@ -933,7 +933,6 @@ function App() {
           </h1>
 
           <div className="meeting-header-actions">
-            <span>LiveKit + Simli</span>
             {!isGuestPage && <a href="/admin">Super Admin</a>}
           </div>
         </header>
@@ -1002,12 +1001,6 @@ function App() {
             alignItems: 'center',
           }}
         >
-          <span
-            style={{ color: '#9cb4d7' }}
-          >
-            LiveKit + Simli
-          </span>
-
           {!isGuestPage && <a
             href="/admin"
             style={{

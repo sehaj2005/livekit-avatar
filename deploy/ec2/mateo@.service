@@ -1,0 +1,24 @@
+[Unit]
+Description=Mateo %i service
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=mateo
+Group=mateo
+SupplementaryGroups=aws-wcp-token
+WorkingDirectory=/srv/mateo/app
+StateDirectory=mateo
+Environment=HOME=/var/lib/mateo
+ExecStart=/bin/bash /srv/mateo/app/deploy/ec2/start-service.sh %i
+Restart=on-failure
+RestartSec=8
+TimeoutStopSec=60
+UMask=0027
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+
+[Install]
+WantedBy=multi-user.target

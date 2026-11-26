@@ -2,7 +2,7 @@ export const isGuestPage = window.location.pathname === '/join';
 
 export const meetingApiUrl = isGuestPage
   ? ''
-  : import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+  : import.meta.env.VITE_API_URL ?? 'http://127.0.0.1:8000';
 
 export function getInviteLink(meetingId: string, inviteCode: string): string {
   const configuredUrl = import.meta.env.VITE_GUEST_JOIN_URL?.trim();

@@ -147,6 +147,11 @@ async function apiRequest<T>(
   );
 
   if (!response.ok) {
+    if (response.status === 401 && endpoint === '/meetings' && meetingApiUrl === '') {
+      window.location.assign('/web-access');
+      throw new Error('Sign in to start a meeting.');
+    }
+
     let message = `Request failed (${response.status})`;
 
     try {
@@ -823,6 +828,18 @@ function App() {
     setCredentials(null);
   }, []);
 
+  async function signOut() {
+    try {
+      const response = await fetch('/web-access/logout', { method: 'POST', redirect: 'manual' });
+      if (response.type !== 'opaqueredirect') {
+        throw new Error('Sign-out failed. Please try again.');
+      }
+      window.location.assign('/web-access');
+    } catch (err) {
+      setError(getErrorMessage(err));
+    }
+  }
+
   async function createNewMeeting() {
     if (!name.trim()) {
       setError('Please enter your name.');
@@ -1000,6 +1017,9 @@ function App() {
           >
             Super Admin Dashboard
           </a>}
+          {import.meta.env.VITE_HOSTED_AUTH === 'true' && (
+            <button type="button" onClick={signOut}>Sign out</button>
+          )}
         </div>
       </header>
 

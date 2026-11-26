@@ -1,0 +1,149 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Mateo on Ubuntu EC2 with a public HTTPS entry point and restricted SSH access.
+Metadata:
+  AWSToolsMetrics:
+    AWSAgentToolkit: aws-cloudformation@3
+Parameters:
+  VpcId:
+    Type: AWS::EC2::VPC::Id
+  SubnetId:
+    Type: AWS::EC2::Subnet::Id
+  SshCidr:
+    Type: String
+    AllowedPattern: '[0-9]{1,3}(\.[0-9]{1,3}){3}/32'
+  SshPublicKey:
+    Type: String
+  InstanceType:
+    Type: String
+    Default: t3.large
+  UbuntuImage:
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: /aws/service/canonical/ubuntu/server/noble/stable/current/amd64/hvm/ebs-gp3/ami-id
+Resources:
+  HostAccess:
+    Type: AWS::EC2::SecurityGroup
+    Metadata:
+      com.aws.cloudformation.Context:
+        why: Allow browser traffic through Nginx and keep application listeners internal.
+        must: Restrict SSH to the operator IPv4 address and expose only web ports publicly.
+    Properties:
+      GroupDescription: Restricted SSH for the Mateo host
+      VpcId: !Ref VpcId
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: !Ref SshCidr
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
+          CidrIp: 0.0.0.0/0
+  OperatorKey:
+    Type: AWS::EC2::KeyPair
+    Metadata:
+      com.aws.cloudformation.Context:
+        why: Import the operator's public key without generating private key material in AWS.
+    Properties:
+      KeyName: !Sub '${AWS::StackName}-operator'
+      PublicKeyMaterial: !Ref SshPublicKey
+  RuntimeSecret:
+    Type: AWS::SecretsManager::Secret
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Metadata:
+      com.aws.cloudformation.Context:
+        why: Store application settings independently from the EC2 lifecycle.
+        must: Populate values separately from the CloudFormation template.
+    Properties:
+      Name: livekit-avatar-starter/ec2/runtime
+      Description: Runtime configuration for the Mateo EC2 deployment
+  AppRole:
+    Type: AWS::IAM::Role
+    Metadata:
+      com.aws.cloudformation.Context:
+        why: Give the instance identity access to its runtime configuration.
+        must: Read only the secret assigned to this deployment.
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ec2.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: ReadMateoRuntimeConfiguration
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - secretsmanager:GetSecretValue
+                  - secretsmanager:DescribeSecret
+                Resource: !Ref RuntimeSecret
+  AppProfile:
+    Type: AWS::IAM::InstanceProfile
+    Metadata:
+      com.aws.cloudformation.Context:
+        why: Attach the scoped configuration role to the Ubuntu instance.
+    Properties:
+      Roles:
+        - !Ref AppRole
+  Host:
+    Type: AWS::EC2::Instance
+    Metadata:
+      com.aws.cloudformation.Context:
+        why: Run Nginx, FastAPI, the LiveKit worker, and the local vision model on one host.
+        must: Require IMDSv2 and encrypt the root volume.
+    Properties:
+      ImageId: !Ref UbuntuImage
+      InstanceType: !Ref InstanceType
+      KeyName: !Ref OperatorKey
+      IamInstanceProfile: !Ref AppProfile
+      MetadataOptions:
+        HttpTokens: required
+        HttpPutResponseHopLimit: 1
+      BlockDeviceMappings:
+        - DeviceName: /dev/sda1
+          Ebs:
+            VolumeType: gp3
+            VolumeSize: 30
+            Encrypted: true
+            DeleteOnTermination: true
+      NetworkInterfaces:
+        - DeviceIndex: '0'
+          AssociatePublicIpAddress: true
+          SubnetId: !Ref SubnetId
+          GroupSet:
+            - !Ref HostAccess
+      Tags:
+        - Key: Name
+          Value: !Ref AWS::StackName
+  PublicAddress:
+    Type: AWS::EC2::EIP
+    Metadata:
+      com.aws.cloudformation.Context:
+        why: Keep the public HTTPS address stable across EC2 stop and start.
+    Properties:
+      Domain: vpc
+  PublicAddressAssociation:
+    Type: AWS::EC2::EIPAssociation
+    Metadata:
+      com.aws.cloudformation.Context:
+        why: Bind the stable public address to the Mateo host.
+    Properties:
+      AllocationId: !GetAtt PublicAddress.AllocationId
+      InstanceId: !Ref Host
+Outputs:
+  InstanceId:
+    Value: !Ref Host
+  PublicIp:
+    Value: !Ref PublicAddress
+  SecurityGroupId:
+    Value: !Ref HostAccess
+  RuntimeSecretArn:
+    Value: !Ref RuntimeSecret

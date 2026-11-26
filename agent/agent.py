@@ -6,6 +6,7 @@ import re
 import time
 import uuid
 
+from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 from skin_voice_bridge import register_skin_voice_bridge
@@ -288,6 +289,7 @@ class RealtimeMateoAssistant(MateoAssistant):
 # No extra idle Python worker on an 8-GB development laptop.
 # The longer startup timeout is retained for Windows process creation.
 server = AgentServer(
+    host="127.0.0.1",
     initialize_process_timeout=60.0,
     num_idle_processes=0,
 )
@@ -376,14 +378,27 @@ async def avatar_agent(
     use_windows_voice = (
         os.name == "nt" and os.getenv("MATEO_USE_WINDOWS_VOICE", "").strip().lower() == "true"
     )
-    if google_api_key:
+    tts_provider = os.getenv("MATEO_TTS_PROVIDER", "").strip().lower()
+    use_livekit_tts = not google_api_key or tts_provider == "livekit"
+    if tts_provider == "piper":
+        from piper_speech import PiperTTS
+
+        reply_tts = await asyncio.to_thread(PiperTTS, Path(os.environ["MATEO_PIPER_MODEL"]))
+        logger.info("Mateo uses local Piper speech synthesis")
+    elif use_livekit_tts:
+        reply_tts = inference.TTS(
+            model="fishaudio/s2.1-pro",
+            voice="fa4c9eb3dccc4806b382b40d61c6b10a",
+        )
+    else:
         reply_tts = google.beta.GeminiTTS(
             model="gemini-3.1-flash-tts-preview",
             voice_name="Charon",
             api_key=google_api_key,
             vertexai=False,
         )
-        if os.name == "nt":
+    if google_api_key:
+        if os.name == "nt" and not use_livekit_tts and tts_provider != "piper":
             windows_voice = WindowsSpeechTTS()
             ctx.add_shutdown_callback(windows_voice.aclose)
             voices = [windows_voice, reply_tts] if use_windows_voice else [reply_tts, windows_voice]
@@ -423,10 +438,7 @@ async def avatar_agent(
             },
             stt=inference.STT(model="deepgram/flux-general", language="en"),
             llm=reply_llm,
-            tts=inference.TTS(
-                model="fishaudio/s2.1-pro",
-                voice="fa4c9eb3dccc4806b382b40d61c6b10a",
-            ),
+            tts=reply_tts,
         )
 
 
@@ -1032,16 +1044,26 @@ async def avatar_agent(
                 max_session_length=int(os.getenv("SIMLI_MAX_SESSION_LENGTH", "3600")),
             ),
             avatar_participant_name="Mateo",
+            conn_options=APIConnectOptions(timeout=8, max_retry=0),
         )
         logger.info("Starting Simli avatar")
+        default_audio_output = session.output.audio
         try:
             # Start before session.start so the avatar receives the agent's audio.
-            await avatar.start(session, room=ctx.room)
+            async with asyncio.timeout(10):
+                await avatar.start(session, room=ctx.room)
+            if session.output.audio is default_audio_output:
+                raise APIConnectionError("Simli did not provide an avatar audio output", retryable=False)
             await avatar.wait_for_join(timeout=30.0)
         except Exception:
-            logger.exception("Simli avatar startup failed")
-            raise
-        logger.info("Mateo Simli avatar joined")
+            logger.warning("Simli avatar unavailable; continuing with direct room audio", exc_info=True)
+            session.output.audio = default_audio_output
+            try:
+                await asyncio.wait_for(avatar.aclose(), timeout=2)
+            except Exception:
+                logger.warning("Could not finish Simli cleanup", exc_info=True)
+        else:
+            logger.info("Mateo Simli avatar joined")
     else:
         logger.info("Simli disabled: voice-only mode")
 

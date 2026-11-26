@@ -41,6 +41,8 @@ from livekit import api
 from backend import (
     analytics,
     admin_accounts,
+    web_access,
+    web_accounts,
 )
 
 
@@ -52,6 +54,7 @@ logger = logging.getLogger("mateo-backend")
 
 analytics.initialize_db()
 admin_accounts.initialize_admin_db()
+web_accounts.initialize()
 
 app = FastAPI(
     title="Mateo Group Meeting API",
@@ -69,6 +72,7 @@ app.dependency_overrides[
 ] = admin_accounts.require_admin
 
 app.include_router(admin_accounts.router)
+app.include_router(web_access.router)
 app.include_router(analytics.router)
 app.include_router(skin_routes.router)
 #app.include_router(medicine_rag.router)
